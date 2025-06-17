@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allanmatt Tech - Digital Solutions Catalogue</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34db34;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 0.5rem auto;
+        }
+        
+        .catalogue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .catalogue-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .catalogue-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .item-image {
+            height: 180px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 3rem;
+        }
+        
+        .item-content {
+            padding: 1.5rem;
+        }
+        
+        .item-content h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .item-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .faq-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1.5rem;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .faq-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-info {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-info a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Allanmatt<span>Tech</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#apps">Apps</a></li>
+                    <li><a href="#computers">Computers</a></li>
+                    <li><a href="#music">Music</a></li>
+                    <li><a href="#audiobooks">Audiobooks</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Digital Solutions for Modern Needs</h1>
+            <p>Explore our catalogue of premium apps, computing solutions, music collections, and audiobooks tailored for professionals and enthusiasts alike.</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section id="apps">
+            <h2 class="section-title">Essential Applications</h2>
+            <div class="catalogue-grid">
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>📱</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Productivity Suite Pro</h3>
+                        <p>Complete office solution with document editing, spreadsheet management, and presentation tools optimized for mobile and desktop.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>📊</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Financial Tracker</h3>
+                        <p>Comprehensive personal and business finance management with automated reports and budget forecasting.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🔒</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Security Shield</h3>
+                        <p>Advanced cybersecurity solution with VPN, malware protection, and privacy tools for all your devices.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🎨</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Design Studio</h3>
+                        <p>Professional-grade graphic design and photo editing tools with cloud collaboration features.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="computers">
+            <h2 class="section-title">Computing Solutions</h2>
+            <div class="catalogue-grid">
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>💻</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Business Workstation</h3>
+                        <p>High-performance desktop setup optimized for office productivity with extended warranty options.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🎮</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Gaming Rig Pro</h3>
+                        <p>Custom-built gaming PCs with top-tier graphics cards, liquid cooling, and RGB lighting.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🖥️</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Creative Workstation</h3>
+                        <p>Powerful systems for video editing, 3D rendering, and graphic design professionals.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>📱</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Mobile Solutions</h3>
+                        <p>Tablets and 2-in-1 devices with stylus support for professionals on the go.</p>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="music">
+            <h2 class="section-title">Music Collections</h2>
+            <div class="catalogue-grid">
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🎵</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>African Rhythms</h3>
+                        <p>Curated collection of contemporary and traditional African music across genres.</p>
+                        <a href="#" class="btn">View Collection</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🎶</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Global Hits</h3>
+                        <p>International chart-toppers and popular tracks from around the world.</p>
+                        <a href="#" class="btn">View Collection</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🎧</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Focus & Study</h3>
+                        <p>Instrumental and ambient music designed to enhance concentration and productivity.</p>
+                        <a href="#" class="btn">View Collection</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🎸</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Classic Collections</h3>
+                        <p>Timeless music from past decades, remastered for optimal audio quality.</p>
+                        <a href="#" class="btn">View Collection</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="audiobooks">
+            <h2 class="section-title">Audiobook Library</h2>
+            <div class="catalogue-grid">
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>📚</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Business & Finance</h3>
+                        <p>Best-selling titles on entrepreneurship, investing, and professional development.</p>
+                        <a href="#" class="btn">Browse Titles</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🔬</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Science & Technology</h3>
+                        <p>Insightful books on emerging tech, scientific discoveries, and innovation.</p>
+                        <a href="#" class="btn">Browse Titles</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🧠</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Personal Development</h3>
+                        <p>Transformative books on mindset, habits, and life optimization.</p>
+                        <a href="#" class="btn">Browse Titles</a>
+                    </div>
+                </div>
+                
+                <div class="catalogue-item">
+                    <div class="item-image">
+                        <i>🎭</i>
+                    </div>
+                    <div class="item-content">
+                        <h3>Fiction & Literature</h3>
+                        <p>Engaging novels and literary works narrated by professional voice actors.</p>
+                        <a href="#" class="btn">Browse Titles</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="faq">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <h3>How do I purchase items from your catalogue?</h3>
+                    <p>You can purchase items directly through our website by clicking the "View Details" or "Buy Now" buttons on each product. We accept various payment methods including mobile money and credit cards.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Do you offer technical support for the apps and software you sell?</h3>
+                    <p>Yes, we provide comprehensive technical support for all software products purchased through us. Support includes installation assistance, troubleshooting, and guidance on features.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Can I request custom computer configurations?</h3>
+                    <p>Absolutely! We specialize in custom-built systems tailored to your specific needs. Contact our sales team with your requirements and we'll provide a quote.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>What formats are your audiobooks available in?</h3>
+                    <p>Our audiobooks are available in multiple formats including MP3, AAC, and FLAC for high-quality listening. You'll receive download links for all compatible formats with your purchase.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3>Do you offer bulk purchase discounts?</h3>
+                    <p>Yes, we offer volume discounts for businesses, educational institutions, and organizations making large purchases. Contact us directly for customized pricing.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p>Have questions or need assistance? Reach out to our team through any of these channels:</p>
+                <p><strong>Email:</strong> <a href="mailto:allanmatthias9@gmail.com">allanmatthias9@gmail.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+256767305480">+256 767 305480</a></p>
+                <p>Business Hours: Monday-Friday, 9:00 AM - 5:00 PM EAT</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Allanmatt Tech. All rights reserved.</p>
+            <p>Your trusted partner for digital solutions and technology products.</p>
+        </div>
+    </footer>
+</body>
+</html>

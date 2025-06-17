@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allanmatt Tech - Premium Digital Products</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 0.5rem auto;
+        }
+        
+        .product-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 0.6rem 1.2rem;
+            margin: 0.5rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .product-image {
+            height: 180px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+        }
+        
+        .product-content h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 0.5rem 0;
+        }
+        
+        .product-price .old-price {
+            font-size: 0.9rem;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+        }
+        
+        .product-rating {
+            color: #f39c12;
+            margin-bottom: 1rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+        }
+        
+        .btn-outline {
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .features-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            background: var(--primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-info a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .features-section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Allanmatt<span>Tech</span></div>
+            <nav>
+                <ul>
+                    <li><a href="My code.html">Home</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="page 5  (solutions).html">Solutions</a></li>
+                    <li><a href="Page 6 (catelogue).html">Catalogue</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Premium Digital Products</h1>
+            <p>Discover our curated selection of high-quality software, apps, and digital solutions designed to enhance your productivity and entertainment.</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section>
+            <h2 class="section-title">Our Product Categories</h2>
+            <div class="product-categories">
+                <button class="category-btn active">All Products</button>
+                <button class="category-btn">Software & Apps</button>
+                <button class="category-btn">Music & Audio</button>
+                <button class="category-btn">E-books & Guides</button>
+                <button class="category-btn">Templates</button>
+                <button class="category-btn">Digital Tools</button>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-badge">Bestseller</div>
+                    <div class="product-image">
+                        <i>📊</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Business Analytics Pro</h3>
+                        <div class="product-rating">★★★★★ (48)</div>
+                        <p>Comprehensive data analysis tool with visualization dashboards for small businesses.</p>
+                        <div class="product-price">$49.99 <span class="old-price">$79.99</span></div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Details</a>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i>🎵</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>African Beats Collection</h3>
+                        <div class="product-rating">★★★★☆ (36)</div>
+                        <p>Premium royalty-free African music tracks for content creators and businesses.</p>
+                        <div class="product-price">$29.99</div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Details</a>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">New</div>
+                    <div class="product-image">
+                        <i>📱</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Mobile Security Suite</h3>
+                        <div class="product-rating">★★★★★ (62)</div>
+                        <p>All-in-one security solution for Android and iOS devices with VPN included.</p>
+                        <div class="product-price">$39.99/year</div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Details</a>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i>📚</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Tech Startup Guide</h3>
+                        <div class="product-rating">★★★★★ (28)</div>
+                        <p>Comprehensive eBook on launching and scaling your technology business in Africa.</p>
+                        <div class="product-price">$19.99</div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Details</a>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">Sale</div>
+                    <div class="product-image">
+                        <i>✉️</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Email Marketing Toolkit</h3>
+                        <div class="product-rating">★★★★☆ (41)</div>
+                        <p>Templates, automation workflows, and guides for effective email campaigns.</p>
+                        <div class="product-price">$34.99 <span class="old-price">$59.99</span></div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Details</a>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i>🎧</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Focus & Productivity Audio</h3>
+                        <div class="product-rating">★★★★★ (57)</div>
+                        <p>Curated audio tracks designed to enhance concentration and work performance.</p>
+                        <div class="product-price">$24.99</div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Details</a>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <i>🖥️</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Website Template Pack</h3>
+                        <div class="product-rating">★★★★☆ (33)</div>
+                        <p>10 responsive HTML templates for various business needs with easy customization.</p>
+                        <div class="product-price">$45.99</div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Details</a>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-badge">Popular</div>
+                    <div class="product-image">
+                        <i>🔐</i>
+                    </div>
+                    <div class="product-content">
+                        <h3>Password Manager Pro</h3>
+                        <div class="product-rating">★★★★★ (89)</div>
+                        <p>Secure password storage and generator with cross-device synchronization.</p>
+                        <div class="product-price">$14.99/year</div>
+                        <div class="product-actions">
+                            <a href="#" class="btn btn-outline">Details</a>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features-section">
+            <h2 class="section-title">Why Choose Our Products</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">✅</div>
+                    <h3>Quality Guaranteed</h3>
+                    <p>All products undergo rigorous testing and quality assurance before release.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Regular Updates</h3>
+                    <p>Continuous improvements and feature additions to keep products current.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Secure & Safe</h3>
+                    <p>Malware-free products with privacy-focused development practices.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">📞</div>
+                    <h3>Dedicated Support</h3>
+                    <p>Responsive customer service to help with any product issues or questions.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2 class="section-title">Have Questions About Our Products?</h2>
+            <div class="contact-info">
+                <h3>We're here to help</h3>
+                <p>Contact our product specialists for more information or purchasing assistance.</p>
+                <p><strong>Email:</strong> <a href="mailto:allanmatthias9@gmail.com">allanmatthias9@gmail.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+256767305480">+256 767 305480</a></p>
+                <p>Available Monday-Saturday, 8:00 AM - 7:00 PM EAT</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Allanmatt Tech. All rights reserved.</p>
+            <p>Quality digital products for work and life.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple category filtering functionality
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelector('.category-btn.active').classList.remove('active');
+                this.classList.add('active');
+                // In a real implementation, you would filter products here
+            });
+        });
+    </script>
+</body>
+</html>

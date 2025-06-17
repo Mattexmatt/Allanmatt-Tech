@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allanmatt Tech - Comprehensive Digital Solutions</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 3rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 1rem auto;
+        }
+        
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .solution-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .solution-icon {
+            height: 120px;
+            background-color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 3.5rem;
+        }
+        
+        .solution-content {
+            padding: 2rem;
+        }
+        
+        .solution-content h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .solution-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+        }
+        
+        .testimonials {
+            background: var(--light);
+            padding: 3rem 0;
+            margin: 3rem 0;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .testimonial-text:before {
+            content: """;
+            font-size: 4rem;
+            color: var(--light);
+            position: absolute;
+            left: -15px;
+            top: -25px;
+            z-index: 0;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .testimonial-role {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .process-section {
+            margin-bottom: 4rem;
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            background: var(--primary);
+            color: white;
+            padding: 3rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-info a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .solutions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Allanmatt<span>Tech</span></div>
+            <nav>
+                <ul>
+                    <li><a href="My code.html">Home</a></li>
+                    <li><a href="catalogue.html">Catalogue</a></li>
+                    <li><a href="solutions.html">Solutions</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Tailored Digital Solutions for Your Business</h1>
+            <p>We deliver cutting-edge technology solutions designed to solve your unique challenges and drive growth.</p>
+            <a href="#contact" class="cta-button">Get Your Custom Solution</a>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section>
+            <h2 class="section-title">Our Comprehensive Solutions</h2>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <i>💻</i>
+                    </div>
+                    <div class="solution-content">
+                        <h3>Custom Software Development</h3>
+                        <p>Bespoke applications tailored to your specific business processes and requirements, built with scalable architectures and modern technologies.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <i>📱</i>
+                    </div>
+                    <div class="solution-content">
+                        <h3>Mobile App Solutions</h3>
+                        <p>Cross-platform mobile applications that deliver seamless user experiences on iOS and Android devices, integrated with your backend systems.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <i>🌐</i>
+                    </div>
+                    <div class="solution-content">
+                        <h3>Web Development Services</h3>
+                        <p>Responsive, high-performance websites and web applications that engage users and convert visitors into customers.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <i>📊</i>
+                    </div>
+                    <div class="solution-content">
+                        <h3>Business Automation</h3>
+                        <p>Streamline your operations with custom workflow automation that reduces manual tasks and improves efficiency across departments.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <i>🔒</i>
+                    </div>
+                    <div class="solution-content">
+                        <h3>Cybersecurity Solutions</h3>
+                        <p>Comprehensive security assessments, implementation, and monitoring to protect your digital assets from evolving threats.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+                
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <i>☁️</i>
+                    </div>
+                    <div class="solution-content">
+                        <h3>Cloud Migration & Management</h3>
+                        <p>Seamless transition to cloud infrastructure with ongoing optimization and management services for peak performance.</p>
+                        <a href="#" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="process-section">
+            <h2 class="section-title">Our Solution Development Process</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">We follow a proven methodology to ensure your technology solutions are delivered on time, within budget, and exceed your expectations.</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Discovery</h3>
+                    <p>In-depth analysis of your business needs, challenges, and goals to define project requirements.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Planning</h3>
+                    <p>Creating a detailed project roadmap with milestones, deliverables, and success metrics.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Development</h3>
+                    <p>Agile implementation with regular progress updates and opportunities for feedback.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Testing</h3>
+                    <p>Rigorous quality assurance to ensure reliability, security, and performance.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3>Deployment</h3>
+                    <p>Smooth rollout with training and documentation for your team.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <h3>Support</h3>
+                    <p>Ongoing maintenance, updates, and optimization to ensure long-term success.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">Client Success Stories</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            "Allanmatt Tech transformed our inventory management with a custom solution that reduced processing time by 60%. Their team understood our unique challenges and delivered beyond expectations."
+                        </div>
+                        <div class="testimonial-author">Sarah Kintu</div>
+                        <div class="testimonial-role">Operations Manager, Retail Solutions Ltd.</div>
+                    </div>
+                    
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            "The mobile app developed by Allanmatt Tech has significantly improved our customer engagement. Their attention to detail and user experience focus made all the difference."
+                        </div>
+                        <div class="testimonial-author">David Mwesigwa</div>
+                        <div class="testimonial-role">CEO, ServicePro Uganda</div>
+                    </div>
+                    
+                    <div class="testimonial">
+                        <div class="testimonial-text">
+                            "We migrated our entire infrastructure to the cloud with Allanmatt Tech's guidance. The transition was seamless, and we've seen notable improvements in reliability and performance."
+                        </div>
+                        <div class="testimonial-author">Grace Nakimera</div>
+                        <div class="testimonial-role">IT Director, Financial Trust Co.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact">
+            <h2 class="section-title">Ready to Transform Your Business?</h2>
+            <div class="contact-info">
+                <h3>Let's discuss your project</h3>
+                <p>Contact us today to schedule a consultation and learn how our solutions can address your specific needs.</p>
+                <p><strong>Email:</strong> <a href="mailto:allanmatthias9@gmail.com">allanmatthias9@gmail.com</a></p>
+                <p><strong>Phone:</strong> <a href="tel:+256767305480">+256 767 305480</a></p>
+                <p>Available Monday-Friday, 8:00 AM - 6:00 PM EAT</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Allanmatt Tech. All rights reserved.</p>
+            <p>Innovative technology solutions for a digital future.</p>
+        </div>
+    </footer>
+</body>
+</html>

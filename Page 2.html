@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products & Services | Allanmatt Tech</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #12dd12;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .hero {
+            padding: 120px 0 60px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #7f8c8d;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #7f8c8d;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--primary-color);
+        }
+        
+        .product-content {
+            padding: 25px;
+        }
+        
+        .product-content h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .product-content p {
+            margin-bottom: 20px;
+            color: #7f8c8d;
+        }
+        
+        .product-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        /* Apps Section */
+        .apps-section {
+            background-color: var(--light-color);
+        }
+        
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .app-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--secondary-color);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 36px;
+        }
+        
+        .app-card h3 {
+            margin-bottom: 10px;
+        }
+        
+        .app-card p {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .download-btn {
+            background-color: var(--success-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-block;
+        }
+        
+        /* Music Section */
+        .music-section {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .music-section .section-title h2,
+        .music-section .section-title p {
+            color: white;
+        }
+        
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .music-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        
+        .music-card:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .music-cover {
+            width: 160px;
+            height: 160px;
+            background-color: #555;
+            margin: 0 auto 15px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .music-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        .music-info p {
+            color: #bdc3c7;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .play-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-color);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn.active {
+            border-bottom-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bdc3c7;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 0 40px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Allanmatt <span>Tech</span></div>
+                <ul class="nav-links">
+                    <li><a href="My code.html">Home</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Our Products & Services</h1>
+            <p>Discover innovative solutions designed to empower your digital journey. From cutting-edge AI to comprehensive training programs.</p>
+            <a href="#contact" class="btn">Get In Touch</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="services">Services</button>
+                <button class="tab-btn" data-tab="apps">Useful Apps</button>
+                <button class="tab-btn" data-tab="music">Music</button>
+                <button class="tab-btn" data-tab="resources">Resources</button>
+            </div>
+            
+            <div id="services" class="tab-content active">
+                <div class="section-title">
+                    <h2>Our Premium Services</h2>
+                    <p>Professional solutions tailored to meet your technological needs</p>
+                </div>
+                
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #e3f2fd;">
+                            💻
+                        </div>
+                        <div class="product-content">
+                            <h3>Computer Training</h3>
+                            <p>Comprehensive courses covering programming, IT fundamentals, and advanced computer skills for all levels.</p>
+                            <div class="product-price">From $99/month</div>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #e8f5e9;">
+                            🤖
+                        </div>
+                        <div class="product-content">
+                            <h3>AI Coding Solutions</h3>
+                            <p>Custom AI and machine learning implementations to automate processes and gain insights from your data.</p>
+                            <div class="product-price">From $299/project</div>
+                            <a href="#" class="btn">Get Started</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #fff8e1;">
+                            📊
+                        </div>
+                        <div class="product-content">
+                            <h3>Betting Predictions</h3>
+                            <p>Data-driven sports betting predictions with advanced algorithms and historical performance analysis.</p>
+                            <div class="product-price">From $49/month</div>
+                            <a href="#" class="btn">View Plans</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #f3e5f5;">
+                            🔒
+                        </div>
+                        <div class="product-content">
+                            <h3>Cyber Security</h3>
+                            <p>Protect your business with our comprehensive security assessments and protection solutions.</p>
+                            <div class="product-price">From $199/month</div>
+                            <a href="#" class="btn">Secure Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #e0f7fa;">
+                            🌐
+                        </div>
+                        <div class="product-content">
+                            <h3>Web Development</h3>
+                            <p>Custom website and web application development with modern technologies and responsive design.</p>
+                            <div class="product-price">From $599/project</div>
+                            <a href="#" class="btn">Request Quote</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #fffde7;">
+                            📱
+                        </div>
+                        <div class="product-content">
+                            <h3>Mobile Apps</h3>
+                            <p>iOS and Android application development tailored to your business requirements.</p>
+                            <div class="product-price">From $1,499/project</div>
+                            <a href="#" class="btn">Discuss Project</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="apps" class="tab-content">
+                <div class="section-title">
+                    <h2>Useful Applications</h2>
+                    <p>Download our collection of productivity and utility apps</p>
+                </div>
+                
+                <div class="apps-grid">
+                    <div class="app-card">
+                        <div class="app-icon">
+                            📅
+                        </div>
+                        <h3>TaskMaster Pro</h3>
+                        <p>Advanced task management with team collaboration features</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            💰
+                        </div>
+                        <h3>Budget Tracker</h3>
+                        <p>Personal finance manager with expense categorization</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            📝
+                        </div>
+                        <h3>NoteSync</h3>
+                        <p>Cloud-synced notes with markdown support</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            🏋️
+                        </div>
+                        <h3>FitTracker</h3>
+                        <p>Workout planner and fitness progress tracker</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            🧠
+                        </div>
+                        <h3>MindTrainer</h3>
+                        <p>Cognitive exercises and memory improvement games</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    
+                    <div class="app-card">
+                        <div class="app-icon">
+                            ⏱️
+                        </div>
+                        <h3>TimeKeeper</h3>
+                        <p>Pomodoro timer with productivity analytics</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="music" class="tab-content">
+                <div class="section-title">
+                    <h2>Music Downloads</h2>
+                    <p>Explore our collection of royalty-free music for your projects</p>
+                </div>
+                
+                <div class="music-grid">
+                    <div class="music-card">
+                        <div class="music-cover"></div>
+                        <div class="music-info">
+                            <h3>Digital Dreams</h3>
+                            <p>Electronic • 3:42</p>
+                            <a href="#" class="play-btn">▶</a>
+                            <a href="#" class="download-btn" style="margin-left: 10px;">Download</a>
+                        </div>
+                    </div>
+                    
+                    <div class="music-card">
+                        <div class="music-cover"></div>
+                        <div class="music-info">
+                            <h3>Urban Flow</h3>
+                            <p>Hip Hop • 2:56</p>
+                            <a href="#" class="play-btn">▶</a>
+                            <a href="#" class="download-btn" style="margin-left: 10px;">Download</a>
+                        </div>
+                    </div>
+                    
+                    <div class="music-card">
+                        <div class="music-cover"></div>
+                        <div class="music-info">
+                            <h3>Acoustic Mornings</h3>
+                            <p>Folk • 4:12</p>
+                            <a href="#" class="play-btn">▶</a>
+                            <a href="#" class="download-btn" style="margin-left: 10px;">Download</a>
+                        </div>
+                    </div>
+                    
+                    <div class="music-card">
+                        <div class="music-cover"></div>
+                        <div class="music-info">
+                            <h3>Corporate Progress</h3>
+                            <p>Instrumental • 3:15</p>
+                            <a href="#" class="play-btn">▶</a>
+                            <a href="#" class="download-btn" style="margin-left: 10px;">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="resources" class="tab-content">
+                <div class="section-title">
+                    <h2>Resources</h2>
+                    <p>Educational materials and tools to enhance your skills</p>
+                </div>
+                
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #e8eaf6;">
+                            📚
+                        </div>
+                        <div class="product-content">
+                            <h3>Programming eBooks</h3>
+                            <p>Collection of programming guides covering Python, JavaScript, and more.</p>
+                            <a href="#" class="btn">Browse Collection</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #f1f8e9;">
+                            🎥
+                        </div>
+                        <div class="product-content">
+                            <h3>Video Tutorials</h3>
+                            <p>Step-by-step video courses on various technology topics.</p>
+                            <a href="#" class="btn">Watch Now</a>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image" style="background-color: #ffebee;">
+                            🛠️
+                        </div>
+                        <div class="product-content">
+                            <h3>Developer Tools</h3>
+                            <p>Curated collection of free tools and utilities for developers.</p>
+                            <a href="#" class="btn">Explore Tools</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="contact" style="background-color: var(--light-color);">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Have questions about our products or services? Reach out to our team</p>
+            </div>
+            
+            <div style="max-width: 600px; margin: 0 auto;">
+                <form id="contactForm" style="background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);">
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="name" style="display: block; margin-bottom: 8px; font-weight: 500;">Your Name</label>
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="email" style="display: block; margin-bottom: 8px; font-weight: 500;">Email Address</label>
+                        <input type="email" id="email" name="email" required style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;">
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="message" style="display: block; margin-bottom: 8px; font-weight: 500;">Your Message</label>
+                        <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px;"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Allanmatt Tech</h3>
+                    <p>Innovating for your digital future with reliable and scalable technology solutions.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">Computer Training</a></li>
+                        <li><a href="#">AI Coding</a></li>
+                        <li><a href="#">Betting Predictions</a></li>
+                        <li><a href="#">Useful Apps</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="#">allanmatthias9@gmail.com</a></li>
+                        <li><a href="#">+256767305480</a></li>
+                        <li><a href="#">Zatt Street</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Allanmatt Tech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab functionality
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Remove active class from all buttons and contents
+                tabBtns.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                btn.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // In a real application, you would send this data to your server
+            console.log('Contact form submitted:', { name, email, message });
+            
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+        
+        // Music player functionality would go here
+        // This would require more complex implementation with audio API
+    </script>
+</body>
+</html>
+<a href="Page 3.html"

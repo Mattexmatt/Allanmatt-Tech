@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Betting Predictions | Allanmatt Tech</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #27ae60; /* Green for betting theme */
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+        }
+        
+        /* Header Styles (Same as previous pages) */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        /* Hero Section */
+        .betting-hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #27ae60 100%);
+            color: white;
+            padding: 150px 0 80px;
+            text-align: center;
+        }
+        
+        .betting-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .betting-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        /* Prediction Dashboard */
+        .dashboard {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: -50px auto 50px;
+            max-width: 1200px;
+            position: relative;
+        }
+        
+        .dashboard-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+        }
+        
+        .dashboard-tab.active {
+            border-bottom-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        /* Prediction Cards */
+        .predictions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .prediction-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .prediction-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .match-header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .match-teams {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .match-league {
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        
+        .match-details {
+            padding: 20px;
+        }
+        
+        .prediction-outcome {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .outcome-box {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            flex: 1;
+            margin: 0 5px;
+            background-color: #f8f9fa;
+        }
+        
+        .outcome-box.selected {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .confidence-meter {
+            height: 6px;
+            background-color: #eee;
+            border-radius: 3px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .confidence-level {
+            height: 100%;
+            background-color: var(--secondary-color);
+            width: 75%; /* Dynamic based on prediction confidence */
+        }
+        
+        .match-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+        
+        /* Betting Tools Section */
+        .tools-section {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        
+        .tool-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .tool-card h3 {
+            margin-bottom: 15px;
+        }
+        
+        /* Strategy Section */
+        .strategy-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .strategy-accordion {
+            margin-top: 40px;
+        }
+        
+        .accordion-item {
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .accordion-item.active .accordion-content {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .betting-hero {
+                padding: 120px 20px 60px;
+            }
+            
+            .betting-hero h1 {
+                font-size: 36px;
+            }
+            
+            .predictions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Allanmatt <span>Tech</span></div>
+            <ul class="nav-links">
+                <li><a href="My code.html">Home</a></li>
+                <li><a href="Page 6 (catelogue).html">Products</a></li>
+                <li><a href="betting.html" class="active">Betting Predictions</a></li>
+                <li><a href="#">AI Coding</a></li>
+                <li><a href="#">Training</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="betting-hero">
+        <div class="container">
+            <h1>Data-Driven Betting Predictions</h1>
+            <p>Leverage our AI-powered algorithms and historical data analysis to make informed betting decisions with higher success rates.</p>
+        </div>
+    </section>
+
+    <div class="dashboard">
+        <div class="dashboard-tabs">
+            <div class="dashboard-tab active">Today's Matches</div>
+            <div class="dashboard-tab">Upcoming</div>
+            <div class="dashboard-tab">Top Value Bets</div>
+            <div class="dashboard-tab">Live Odds</div>
+        </div>
+        
+        <h2 style="margin-bottom: 20px;">Featured Predictions</h2>
+        <div class="predictions-grid">
+            <!-- Prediction Card 1 -->
+            <div class="prediction-card">
+                <div class="match-header">
+                    <div class="match-teams">Manchester United vs Liverpool</div>
+                    <div class="match-league">Premier League</div>
+                </div>
+                <div class="match-details">
+                    <div class="prediction-outcome">
+                        <div class="outcome-box">
+                            <div>1</div>
+                            <div>3.25</div>
+                        </div>
+                        <div class="outcome-box">
+                            <div>X</div>
+                            <div>3.40</div>
+                        </div>
+                        <div class="outcome-box selected">
+                            <div>2</div>
+                            <div>2.10</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 15px 0;">
+                        <strong>Prediction:</strong> Liverpool Win
+                    </div>
+                    
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Confidence:</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="confidence-meter">
+                            <div class="confidence-level" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="match-stats">
+                        <div>Kickoff: 17:30 GMT</div>
+                        <div>AI Score: 82/100</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prediction Card 2 -->
+            <div class="prediction-card">
+                <div class="match-header" style="background-color: #3498db;">
+                    <div class="match-teams">Barcelona vs Real Madrid</div>
+                    <div class="match-league">La Liga</div>
+                </div>
+                <div class="match-details">
+                    <div class="prediction-outcome">
+                        <div class="outcome-box selected">
+                            <div>1</div>
+                            <div>2.30</div>
+                        </div>
+                        <div class="outcome-box">
+                            <div>X</div>
+                            <div>3.50</div>
+                        </div>
+                        <div class="outcome-box">
+                            <div>2</div>
+                            <div>2.80</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 15px 0;">
+                        <strong>Prediction:</strong> Barcelona Win
+                    </div>
+                    
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Confidence:</span>
+                            <span>68%</span>
+                        </div>
+                        <div class="confidence-meter">
+                            <div class="confidence-level" style="width: 68%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="match-stats">
+                        <div>Kickoff: 20:00 GMT</div>
+                        <div>AI Score: 79/100</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Prediction Card 3 -->
+            <div class="prediction-card">
+                <div class="match-header" style="background-color: #e74c3c;">
+                    <div class="match-teams">Bayern Munich vs Dortmund</div>
+                    <div class="match-league">Bundesliga</div>
+                </div>
+                <div class="match-details">
+                    <div class="prediction-outcome">
+                        <div class="outcome-box selected">
+                            <div>1</div>
+                            <div>1.80</div>
+                        </div>
+                        <div class="outcome-box">
+                            <div>X</div>
+                            <div>3.75</div>
+                        </div>
+                        <div class="outcome-box">
+                            <div>2</div>
+                            <div>4.20</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 15px 0;">
+                        <strong>Prediction:</strong> Bayern Munich Win
+                    </div>
+                    
+                    <div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>Confidence:</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="confidence-meter">
+                            <div class="confidence-level" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="match-stats">
+                        <div>Kickoff: 19:30 GMT</div>
+                        <div>AI Score: 88/100</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <button style="padding: 12px 30px; background-color: var(--secondary-color); color: white; border: none; border-radius: 5px; font-weight: 600; cursor: pointer;">
+                View All Predictions
+            </button>
+        </div>
+    </div>
+
+    <section class="tools-section">
+        <h2 style="text-align: center; margin-bottom: 50px; font-size: 36px;">Betting Tools</h2>
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">📊</div>
+                <h3>Odds Calculator</h3>
+                <p>Calculate potential winnings and convert between different odds formats (decimal, fractional, American).</p>
+                <button style="margin-top: 15px; padding: 8px 20px; background-color: var(--secondary-color); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    Open Tool
+                </button>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">📈</div>
+                <h3>Value Bet Finder</h3>
+                <p>Identify bets where the probability of an outcome is higher than what the odds suggest.</p>
+                <button style="margin-top: 15px; padding: 8px 20px; background-color: var(--secondary-color); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    Open Tool
+                </button>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">💸</div>
+                <h3>Bankroll Manager</h3>
+                <p>Track your betting history and manage your bankroll with our advanced tracking system.</p>
+                <button style="margin-top: 15px; padding: 8px 20px; background-color: var(--secondary-color); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    Open Tool
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="strategy-section">
+        <h2 style="text-align: center; margin-bottom: 15px; font-size: 36px;">Betting Strategies</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; color: #7f8c8d;">
+            Learn proven strategies to improve your betting performance and maximize profits.
+        </p>
+        
+        <div class="strategy-accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Value Betting Strategy</span>
+                    <span>+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Value betting involves identifying bets where the probability of an outcome is higher than what the odds suggest. Our AI helps find these value opportunities by comparing our predicted probabilities with bookmaker odds.</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Focus on matches where our confidence score is 70%+</li>
+                        <li>Look for odds discrepancies across bookmakers</li>
+                        <li>Bet only when you have a clear edge</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Bankroll Management</span>
+                    <span>+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Proper bankroll management is crucial for long-term success in sports betting. We recommend the following approach:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Never bet more than 1-2% of your bankroll on a single bet</li>
+                        <li>Adjust stake sizes based on confidence levels</li>
+                        <li>Keep detailed records of all your bets</li>
+                        <li>Withdraw profits periodically</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <span>Live Betting Tactics</span>
+                    <span>+</span>
+                </div>
+                <div class="accordion-content">
+                    <p>Live betting offers unique opportunities for informed bettors. Our real-time algorithms help identify these situations:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Look for matches where the pre-game favorite is losing but dominating statistically</li>
+                        <li>Target over/under markets when the game pace changes</li>
+                        <li>Watch for key player substitutions that change team dynamics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background-color: var(--primary-color); color: white; padding: 50px 20px 20px;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px;">
+                <div>
+                    <h3 style="margin-bottom: 20px; font-size: 18px;">Allanmatt Tech</h3>
+                    <p>Innovating for your digital future with reliable and scalable technology solutions.</p>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 20px; font-size: 18px;">Products</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: #bdc3c7; text-decoration: none;">Betting Predictions</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: #bdc3c7; text-decoration: none;">AI Coding</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: #bdc3c7; text-decoration: none;">Computer Training</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 20px; font-size: 18px;">Legal</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: #bdc3c7; text-decoration: none;">Terms of Service</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: #bdc3c7; text-decoration: none;">Privacy Policy</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: #bdc3c7; text-decoration: none;">Responsible Gambling</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 20px; font-size: 18px;">Contact</h3>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: #bdc3c7; text-decoration: none;">support@allanmatttech.com</a></li>
+                        <li style="margin-bottom: 10px;"><a href="#" style="color: #bdc3c7; text-decoration: none;">+1 (555) 123-4567</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #bdc3c7; font-size: 14px;">
+                <p>&copy; 2023 Allanmatt Tech. All rights reserved.</p>
+                <p style="margin-top: 5px; font-size: 12px;">Disclaimer: Betting involves risk. Please gamble responsibly.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.accordion-header span:last-child').textContent = '+';
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                    header.querySelector('span:last-child').textContent = '-';
+                }
+            });
+        });
+        
+        // Tab functionality
+        document.querySelectorAll('.dashboard-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelector('.dashboard-tab.active').classList.remove('active');
+                tab.classList.add('active');
+                // In a real app, you would load the appropriate content here
+            });
+        });
+        
+        // Simulate loading predictions
+        document.addEventListener('DOMContentLoaded', () => {
+            // This would be replaced with actual API calls in production
+            console.log('Loading betting predictions...');
+        });
+    </script>
+</body>
+</html>
